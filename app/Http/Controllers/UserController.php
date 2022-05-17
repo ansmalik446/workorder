@@ -7,6 +7,7 @@ use App\Models\Sport;
 use App\Models\roaster;
 use App\Models\Product_option;
 use App\Models\place_order;
+use App\Models\Order_plac;
 use App\Models\order_lettering;
 use App\Models\Prod_option;
 
@@ -230,11 +231,92 @@ class UserController extends Controller
             $loc3 =null;
 
         }
+
+        
+        if(isset($request->po2))
+        {
+            $po2 =$request->po2;
+            $po2=implode(",",$po2);
+
+        }
+        else{
+            $po2 =null;
+
+        }
+        if(isset($request->po3))
+        {
+            $po3 =$request->po3;
+            $po3=implode(",",$po3);
+
+        }
+        else{
+            $po3 =null;
+
+        }
+        if(isset($request->po4))
+        {
+            $po4 =$request->po4;
+            $po4=implode(",",$po4);
+
+        }
+        else{
+            $po4 =null;
+
+        }
+        
+        if(isset($request->co2))
+        {
+            $co2 =$request->co2;
+            $co2=implode(",",$co2);
+
+        }
+        else{
+            $co2 =null;
+
+        }
+        if(isset($request->co3))
+        {
+            $co3 =$request->co3;
+            $co3=implode(",",$co3);
+
+        }
+        else{
+            $co3 =null;
+
+        }
+        if(isset($request->co4))
+        {
+            $co4 =$request->co4;
+            $co4=implode(",",$co4);
+
+        }
+        else{
+            $co4 =null;
+
+        }
+        
+
+
+           //dd($request,$po1,$po3,$po2,$po4);
+
+            
+            //$table->text('wo_id')->nullable();
+            //$table->text('file')->nullable();
+            
+            //$table->text('logo1')->nullable();
+
         $rand=rand(11111, 99999); 
         $use=new place_order();
         $use->team_name=$request->team_name;
         $use->order_id=$request->order_id;
         $use->wo_id=$request->wo_id;
+
+        $use->po2=$po2;
+        $use->po3=$po3;
+        $use->po4=$po4;
+        $use->co2=$co2;
+        $use->co3=$co3;
+        $use->co4=$co4;
         $use->notes=$request->notes;
         $use->prod_id=$request->pro_id;
         
@@ -323,6 +405,75 @@ class UserController extends Controller
                 }
             }
 
+
+
+// 
+
+$cont1=count($request->key);
+
+for($i=0; $i< $cont1; $i++ )
+{
+    // echo "<pre>";
+
+    if(isset($request->po1[$i]))
+    {
+        // var_dump($request->key[$i]);
+        
+        
+        $count2 = count($request->po1[$i]);
+        
+        for($j=0; $j< $count2; $j++ )
+        {
+            $ordr = new Order_plac;
+
+            $ordr->place_order_id = $use->id;
+            $ordr->product_option = $request->key[$i];
+            $ordr->poductid = $request->po1[$i][$j];
+            $ordr->save();
+            // var_dump($request->po1[$i][$j]);
+            
+
+        }
+    
+    }
+}
+
+// die();
+
+// 
+// 
+
+$cont3=count($request->key2);
+
+for($i=0; $i< $cont3; $i++ )
+{
+    // echo "<pre>";
+
+    if(isset($request->co1[$i]))
+    {
+        // var_dump($request->key2[$i]);
+        
+        
+        $count4 = count($request->co1[$i]);
+        
+        for($j=0; $j< $count4; $j++ )
+        {
+            $ordr = new Order_plac;
+
+            $ordr->place_order_id = $use->id;
+            $ordr->product_option = $request->key2[$i];
+            $ordr->poductid = $request->co1[$i][$j];
+            $ordr->save();
+            // var_dump($request->po1[$i][$j]);
+            
+
+        }
+    
+    }
+}
+//  die();
+
+// 
             
             return redirect()->route('roster', ['id' => $use->id]);
 
