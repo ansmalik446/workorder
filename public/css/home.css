@@ -1,0 +1,54 @@
+.card {
+    width: 100%;
+    max-width: 450px;
+    background-color: #FFF !important;
+    padding: 0 2rem 1.5rem 2rem !important;
+    border-radius: 0px !important;
+    border: 1px solid #953334 !important;
+    transition: .3s linear !important;
+}
+
+.card:hover {
+    /* box-shadow: 0 0 25px #953334; */
+    box-shadow: 9px 11px 9px 0px rgba(128,128,128,0.75);
+    transform: translateY(-10px);
+}
+
+.card .card-img {
+    border-radius: 0px;
+    overflow: hidden;
+    /* box-shadow: 0 0 25px #953334; */
+    box-shadow: 5px 5px 11px 0px rgba(128,128,128,0.75);
+    transform: translateY(-15%);
+    transition: box-shadow .3s linear;
+}
+
+.card:hover .card-img {
+    box-shadow: none;
+}
+
+
+/* .img_sports {
+    width: 195px;
+    height: 114px;
+} */
+
+.card .card-img img {
+    width: 100%;
+    display: block;
+}
+
+.card .card-content {
+    text-align: center;
+}
+
+.card .card-content .big-title {
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.card .card-content .medium-title {
+    color: #999;
+    font-size: .85rem;
+    margin-top: .3rem;
+}
