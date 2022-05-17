@@ -29,6 +29,22 @@
     min-height: 332px!important;
 }
 
+.select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 4px !important;
+    cursor: text;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    position: relative;
+    width: 121px !important;
+    border: 1px solid #ced4da !important;
+}
+.form-control-sm {
+    border-radius: 4px !important;
+
+}
+
 
 </style>
 
@@ -285,7 +301,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-5 mr-2"><b>Main Color:</b></label>
+                                        <label for="location" class="col-sm-6"><b>Main Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                             
@@ -305,7 +321,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-5 mr-2"><b>Trim Color:</b></label>
+                                        <label for="location" class="col-sm-6"><b>Trim Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                             
@@ -326,8 +342,8 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-4 mr-4"><b>Size:</b></label>
-                                        <div class="col-sm-6 pl-xs-3 pl-md-2" style="">
+                                        <label for="location" class="col-sm-6"><b>Size:</b></label>
+                                        <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
                                             
                                             <select class="select2-multiple form-group  form-control" aria-label=".form-control-sm example" name="size[0][]" multiple="multiple" style="padding: 0.375rem 0.75rem!important;">
 
@@ -379,7 +395,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-5 mr-2"><b>Main Color:</b></label>
+                                        <label for="location" class="col-sm-6"><b>Main Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                            
@@ -400,7 +416,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-5 mr-2"><b>Trim Color:</b></label>
+                                        <label for="location" class="col-sm-6"><b>Trim Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                            
@@ -421,7 +437,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-5 mr-2"><b>Size:</b></label>
+                                        <label for="location" class="col-sm-6"><b>Size:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                            
