@@ -1,9 +1,11 @@
 @extends('user.layout.header')
 
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="sweetalert2.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
 <link rel="stylesheet" href="sweetalert2.min.css">
+<script src="sweetalert2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
 <style>
     .table2,
@@ -103,14 +105,20 @@
                     <h3 class="productHeading pt-3 text-center">Product Options</h3>
                                    
                     <div class="px-3 py-2">
+                        @php
+                        $po=0;
                         
+                        $child=0;
+                        @endphp
                         @foreach ($product_option as $key => $value)
+                        
                             <div class="form-group row">
    
     
                                     <label for="location" class="col-sm-5 mr-2"><b>{{$key}}:</b></label>
                                     <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                    <select name="po1[]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
+                                        <input type="hidden" name="key[{{$child}}]" value="{{$key}}">
+                                    <select name="po1[{{$po}}][]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
                                     @foreach($value as $propr3)    
                                         <option value="{{$propr3->id}}">{{$propr3->property}}</option>
                                     @endforeach
@@ -119,6 +127,11 @@
                                
                                 
                             </div>
+                            @php
+                        $po++;
+                        $child++;
+
+                        @endphp
                         @endforeach
 
                              
@@ -137,29 +150,38 @@
                 <div class="row">
                     <div class="col pt-5">
                         <div class="colorOptions">
-                            <h3 class="optionsHeading pt-3 text-center">Color Options dfs</h3>
+                            <h3 class="optionsHeading pt-3 text-center">Color Options</h3>
                             <div class="px-3 py-2">
-
+                            @php
+                            $co=0;
+                            
+                            $child2=0;
+                            @endphp
                                 @foreach($color_version as $key => $value)
 
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>{{$key}}:</b></label>
+                                        <label for="location" class="col-sm-5 mr-2"><b>{{$key}}:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
+                                        <input type="hidden" name="key2[{{$child2}}]" value="{{$key}}">
                                            
-                                            <select class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple" name="co1[]">
+                                            <select name="co1[{{$co}}][]" class="clrop select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
                                         
                                                 @foreach($value as $list5)    
                                                 
-                                                    <option class="clrop" value="{{$list5->id}}" vsl2="{{$list5->color}}">{{$list5->property}}</option>
+                                                    <option value="{{$list5->id}}" data-val2="{{$list5->color}}">{{$list5->property}}</option>
                                                 @endforeach
                                             </select>
                                         
                                         </div>
                                         
                                     </div>
+                                    @php
+                                    $co++;
+                                    $child2++;
 
+                                    @endphp
 
                                 @endforeach 
                              
@@ -169,17 +191,9 @@
 
                                 <div class="form-group">
 
-                                    <table class="m-auto">
+                                    <table class="m-auto colortable">
                                         <tr class="tr2">
-                                            <th class="th2 p-2">
-                                                <input type="color" name="colo1" >
-                                            </th>
-                                            <th class="th2 p-2">
-                                                <input type="color" name="colo2" value="#195232">
-                                            </th>
-                                            <th class="th2 p-2">
-                                                <input type="color" name="colo3" value="#5f1c1c">
-                                            </th>
+                                            
                                         </tr>
 
                                     </table>
@@ -263,7 +277,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>Main Color:</b></label>
+                                        <label for="location" class="col-sm-5 mr-2"><b>Main Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                             
@@ -283,7 +297,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>Trim Color:</b></label>
+                                        <label for="location" class="col-sm-5 mr-2"><b>Trim Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                             
@@ -304,8 +318,8 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>Size:</b></label>
-                                        <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
+                                        <label for="location" class="col-sm-4 mr-4"><b>Size:</b></label>
+                                        <div class="col-sm-6 pl-xs-3 pl-md-2" style="">
                                             
                                             <select class="select2-multiple form-group  form-control" aria-label=".form-control-sm example" name="size[0][]" multiple="multiple" style="padding: 0.375rem 0.75rem!important;">
 
@@ -357,7 +371,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>Main Color:</b></label>
+                                        <label for="location" class="col-sm-5 mr-2"><b>Main Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                            
@@ -378,7 +392,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>Trim Color:</b></label>
+                                        <label for="location" class="col-sm-5 mr-2"><b>Trim Color:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                            
@@ -399,7 +413,7 @@
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>Size:</b></label>
+                                        <label for="location" class="col-sm-5 mr-2"><b>Size:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
 
                                            
@@ -449,12 +463,30 @@
         </div>
     </form>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 <!-- <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script> -->
 
 <script>
     $(document).ready(function() {
+        $(document).on('change', '.clrop', function() {
+
+
+            var options = $(this).find('option:selected').map(function() {
+                return val2 = $(this).data('val2');
+            }).get();
+
+            var inpt ="<tr class='tr2'><th class='th2 p-2'><input type='color' value='" + val2 + "'></th></tr>"; 
+
+            $(".colortable>tbody>tr").append(inpt);
+            // alert(val2);
+
+        });
+
+
         // Select2 Multiple
         $('.select2-multiple').select2({
             placeholder: "Select",
@@ -463,9 +495,7 @@
         });
     });
 </script>
-<script>
-    $('.dropify').dropify();
-</script>
+
 <script>
     $(document).ready(function() {
         $('#btn_text').click(function() {
@@ -835,12 +865,7 @@
                });
             });
             
-            $('.clrop').on('click', function () {
-                jQuery.noConflict();
-
-
-                alert('ddd');
-            });
+            
 
                        
     });

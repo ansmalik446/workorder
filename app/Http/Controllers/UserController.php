@@ -7,6 +7,7 @@ use App\Models\Sport;
 use App\Models\roaster;
 use App\Models\Product_option;
 use App\Models\place_order;
+use App\Models\Order_plac;
 use App\Models\order_lettering;
 use App\Models\Prod_option;
 
@@ -253,16 +254,8 @@ class UserController extends Controller
             $loc3 =null;
 
         }
-        if(isset($request->po1))
-        {
-            $po1 =$request->po1;
-            $po1=implode(",",$po1);
 
-        }
-        else{
-            $po1 =null;
-
-        }
+        
         if(isset($request->po2))
         {
             $po2 =$request->po2;
@@ -293,16 +286,7 @@ class UserController extends Controller
             $po4 =null;
 
         }
-        if(isset($request->co1))
-        {
-            $co1 =$request->co1;
-            $co1=implode(",",$co1);
-
-        }
-        else{
-            $co1 =null;
-
-        }
+        
         if(isset($request->co2))
         {
             $co2 =$request->co2;
@@ -350,11 +334,9 @@ class UserController extends Controller
         $use->order_id=$request->order_id;
         $use->wo_id=$request->wo_id;
 
-        $use->po1=$po1;
         $use->po2=$po2;
         $use->po3=$po3;
         $use->po4=$po4;
-        $use->co1=$co1;
         $use->co2=$co2;
         $use->co3=$co3;
         $use->co4=$co4;
@@ -446,6 +428,75 @@ class UserController extends Controller
                 }
             }
 
+
+
+// 
+
+$cont1=count($request->key);
+
+for($i=0; $i< $cont1; $i++ )
+{
+    // echo "<pre>";
+
+    if(isset($request->po1[$i]))
+    {
+        // var_dump($request->key[$i]);
+        
+        
+        $count2 = count($request->po1[$i]);
+        
+        for($j=0; $j< $count2; $j++ )
+        {
+            $ordr = new Order_plac;
+
+            $ordr->place_order_id = $use->id;
+            $ordr->product_option = $request->key[$i];
+            $ordr->poductid = $request->po1[$i][$j];
+            $ordr->save();
+            // var_dump($request->po1[$i][$j]);
+            
+
+        }
+    
+    }
+}
+
+// die();
+
+// 
+// 
+
+$cont3=count($request->key2);
+
+for($i=0; $i< $cont3; $i++ )
+{
+    // echo "<pre>";
+
+    if(isset($request->co1[$i]))
+    {
+        // var_dump($request->key2[$i]);
+        
+        
+        $count4 = count($request->co1[$i]);
+        
+        for($j=0; $j< $count4; $j++ )
+        {
+            $ordr = new Order_plac;
+
+            $ordr->place_order_id = $use->id;
+            $ordr->product_option = $request->key2[$i];
+            $ordr->poductid = $request->co1[$i][$j];
+            $ordr->save();
+            // var_dump($request->po1[$i][$j]);
+            
+
+        }
+    
+    }
+}
+//  die();
+
+// 
             
             return redirect()->route('roster', ['id' => $use->id]);
 
