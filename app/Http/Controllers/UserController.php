@@ -114,7 +114,7 @@ class UserController extends Controller
         
         if($request->name !=null)
         {
-            
+
             foreach ($request->name as $item => $v) 
             {
        
