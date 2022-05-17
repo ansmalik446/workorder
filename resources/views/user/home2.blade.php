@@ -108,26 +108,26 @@
             <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:black">Product: </span>{{$data->Product->name}}</p>
         </td>
     </tr>
+    @php 
+        $collection = collect($data->option);
+        $collection_color = collect($data->option_color);
+      
+        $grouped = $collection->groupBy('product_option');
+        $grouped_color = $collection->groupBy('product_option'); 
+    @endphp
+
+    @foreach($grouped as $key=>$po_value)
     <tr>
         <td style="padding-left: 20px;">
-            <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:black">Fabric Choice: </span>{{$data->po1}}</p>
+            <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:black">{{$key}}:</span> 
+                @foreach($po_value as $po_row)
+                {{$po_row->option_porperty->property}},
+                @endforeach
+            </p>
         </td>
     </tr>
-    <tr>
-        <td style="padding-left: 20px;">
-            <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:black">Neck Style: </span>{{$data->po2}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding-left: 20px;">
-            <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:black">Per Design: </span>{{$data->po3}}</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding-left: 20px;">
-            <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:black">Shorts Inseam: </span>{{$data->po4}}</p>
-        </td>
-    </tr>
+    @endforeach
+    
     <tr>
 
         <td scope="row" colspan="2" style="padding-top: 20px;padding-left: 20px;">
@@ -172,28 +172,18 @@
         <!--    <b style="color: red;padding-left: 20px;">Based on product item selected will dictate options listed below.</b>-->
         <!--</td>-->
     </tr>
+    @foreach($grouped_color as $key_co=>$co_value)
     <tr>
-        <td>
-            <p style="color: black;padding-left: 20px;"><span style="font-weight: bold;">Neck:</span>Purple <span style="color: red;">{{$data->co1}}</span></p>
+        <td style="padding-left: 20px;">
+            <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:black">{{$key_co}}:</span> 
+                @foreach($co_value as $co_row)
+                {{$co_row->option_porperty->property}},
+                @endforeach
+            </p>
         </td>
     </tr>
-    <tr>
-        <td>
-            <p style="color: black;padding-left: 20px;margin: 0px;margin-top:-16px;"><span style="font-weight: bold;">Accent One: </span> <span style="color: red;">{{$data->co2}}</span></p>
-        </td>
-    </tr>
+    @endforeach
     
-   
-    <tr>
-        <td>
-            <p style="color: black;padding-left: 20px;margin: 0px;"><span style="font-weight: bold;">BU Logo: </span> <span style="color: red;">{{$data->co3}}</span></p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p style="color: black;padding-left: 20px;margin: 0px;"><span style="font-weight: bold;">Body : </span> <span style="color: red;">{{$data->co4}}</span></p>
-        </td>
-    </tr>
     <tr>
         <td style="padding-top: 20px;padding-left: 20px;">
            {{--  <b style="color:red;">Give a select box where user can select the number of colors then choose the colors to
@@ -354,7 +344,7 @@
 
 
 
-
+@if(count($data->roaster)!=0) 
 <table style="width:100%;">
 <tbody>
     <tr>
@@ -384,6 +374,7 @@
 {{--             <b style="color: red;">Table where user can add additional lines</b>
  --}}        </td>
     </tr>
+   
     <tr>
         <td style="padding-top:10px;padding-left:20px;">
             <h2>Roster</h2>
@@ -437,6 +428,7 @@
     </tbody>
 
 </table>
+@endif
 </main>
 <!-- <table>
     <tr class="w_100">

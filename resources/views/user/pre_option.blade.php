@@ -28,7 +28,7 @@ section.productFeatures {
             {{-- <a href="{{url('rosters')}}"> <input type="button" value="Roster" class="btn btn-success mr-2 bg-success"></a> --}}
             {{-- <a href="{{url("print")}}"> <input type="button" value="print" class="btn btn-primary mr-2"></a> --}}
         </div>
-        <form action="{{url('user/add/updat_order/' .$pre_data->id)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{url('admins/add/updat_order/' .$pre_data->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-12 pt-5">
@@ -933,7 +933,7 @@ section.productFeatures {
                 $.ajax({
 
                     type: 'get',
-                    url: '{{URL::to('user/get_previous')}}',
+                    url: '{{URL::to('admins/get_previous')}}',
                     data: {'id': id,'pro_id':pro_id},
 
                     success: function (data) {

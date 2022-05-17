@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-9">
                 <div class="d-flex justify-content-end align-items-center pl-4 pt-4">
-                    <a href="{{ url('admins/')}}"><button class="btn btn-primary print_btn2 mr-2 d-none" ></button></a>
+                    <a href="{{ url('admins/')}}"><hi class="print_btn2 d-none  mr-2"  ></h1></a>
              <input type="submit" value="Print And Save" name="btn_val" class="btn btn-primary print_btn1 mr-2 d-none " formtarget="_blank">
 
              <input type="button" value="Print And Save" name="btn_val" class="btn btn-primary print_btn mr-2">
@@ -40,7 +40,8 @@
                      $p=0;
 
                  @endphp
-                @foreach($prev_ros as $row_rost)
+                
+                @forelse($prev_ros as $row_rost)
                 @php $p++; @endphp
                 @if($r==0)
                 <div class="col-lg-3 col-xl-3 col-md-3 col-12">
@@ -60,21 +61,25 @@
 
                         @endphp
                        <button class="btn btn-primary" id="btn_addsection" type="button" add_new="{{count($prev_ros)}}" add_roast="{{$add_ros}}"><i class="fas fa-plus"></i>&nbsp; Add New Roster</button>
+
+
+                       
+                    
+               
                     </div>
                 </div>
                 @else
                 <div class="col-lg-3 col-xl-3 col-md-3 col-12">
-                    
                 </div>
                 @endif
                 <div class="col-lg-9 col-xl-9 col-md-9 col-12" id="sectionadd">
                     @if (\Session::has('error'))
-    <div class="alert alert-danger">
-        <ul>
-            <li>{!! \Session::get('error') !!}</li>
-        </ul>
-    </div>
-@endif
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li>{!! \Session::get('error') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
                    
                      <div class="row mx-3 my-3 bg-white roster-border" id="roster-border{{$r}}">
                         <div class="col-12">
@@ -89,9 +94,9 @@
                                     {{-- <input name="order_id" type="hidden"  value="{{$id}}" /> --}}
                                     <input name="file{{$r}}" type="file"  class="csv_data{{$r}}" accept=".csv">
                                     <button class="btn btn-primary add_roaster_csv" val="{{$r}}" type="button">Add</button><a href="{{asset('sample.csv')}}" download="" data-toggle="tooltip" title="Sample File"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-</svg></i>
-</a>
+                   <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                   </svg></i>
+                   </a>
 
                                   {{-- <img src="./img/uploadicon.png" class="img-fluid"> --}}
                                 </div>
@@ -151,7 +156,79 @@
                     </div>
                   
                 </div>
-                @endforeach
+                @empty
+                <div class="col-lg-3 col-xl-3 col-md-3 col-12">
+                    <div class="py-5 text-center pt-5">
+                       <button class="btn btn-primary" id="btn_addsection" type="button" add_new="1" add_roast="0"><i class="fas fa-plus"></i>&nbsp; Add New Roster</button>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-xl-9 col-md-9 col-12" id="sectionadd">
+                   
+                    <div class="row mx-3 my-3 bg-white roster-border">
+                        <div class="col-12">
+                            <h3 class="pt-4 pl-4">ROSTER</h3>
+                        </div>
+
+                        <div class="col-12 pt-4 d-flex justify-content-between">
+                            <div>
+                                <div class="uploadLogo mt-2 p-2">
+                                    {{-- <input name="order_id" type="hidden"  value="{{$id}}" /> --}}
+                                    <input name="file{{$r}}" type="file"  class="csv_data{{$r}}" accept=".csv">
+                                    <button class="btn btn-primary add_roaster_csv" val="{{$r}}" type="button">Add</button>
+                                    <a href="{{asset('sample.csv')}}" download="" data-toggle="tooltip" title="Sample File"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                    </svg></i>
+                                    </a>
+
+                                  {{-- <img src="./img/uploadicon.png" class="img-fluid"> --}}
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center pl-4">
+                                <button class="btn btn-primary btn_addRow" id="" val2="1" val3="0" type="button"><i class="fas fa-plus"></i>&nbsp; Add Row</button>
+
+                            </div>
+                        </div>
+                        <div class="col-12 pt-5 text-center">
+                            <textarea style="
+                        color: #FFF;
+                        background: transparent;
+                        color: black;
+                       border: none;
+                        outline: none;color: black" name="name[0][]" id="" cols="20" rows="1">Roster name</textarea>
+                        {{-- <h4>Roster Name</h4> --}}
+                        </div>
+                        <div class="col-12 pt-4">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Number</th>
+                                        <th scope="col">Name(if Applicable)</th>
+                                        <th scope="col">Top Size</th>
+                                        <th scope="col">Bottom Size</th>
+                                        <th scope="col">Notes</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="add_row1">
+                                    <tr class="rowadd" id="removeTr">
+                                        <th scope="row"><input type="number" size="2"  class="form-control" name="number[0][]"required></th>
+                                        <td><input type="text" class="form-control" name="sname[0][]"></td>
+                                        <td><input type="text" class="form-control" name="top_size[0][]"required></td>
+                                        <td><input type="text" class="form-control" name="bottom_size[0][]"required></td>
+                                        <td><input type="text" class="form-control" name="notes[0][]"required></td>
+                                        <td><i class="fa fa-trash text-danger "id="deletebtn" ></i></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                @endforelse
+
 
 
             </div>
