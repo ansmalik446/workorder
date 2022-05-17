@@ -30,21 +30,51 @@
 }
 
 .select2-container--default .select2-selection--multiple {
-    background-color: white;
     border: 1px solid #aaa;
     border-radius: 4px !important;
     cursor: text;
     padding-bottom: 5px;
     padding-right: 5px;
     position: relative;
-    width: 121px !important;
     border: 1px solid #ced4da !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .select2-container--default .select2-selection--multiple {
+        width: 296px !important;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .select2-container--default .select2-selection--multiple {
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .select2-container--default .select2-selection--multiple {
+    width: 151px !important;
+  }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .select2-container--default .select2-selection--multiple {
+    width: 88px !important;
+  }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .select2-container--default .select2-selection--multiple {
+    width: 138px !important;
+  }
 }
 .form-control-sm {
     border-radius: 4px !important;
 
 }
-
 
 </style>
 
@@ -213,16 +243,12 @@
 
 
 
-                                <div class="form-group">
-
-                                    <table class="m-auto colortable">
-                                        <tr class="tr2">
+                                <div class="form-group">                            
+                                    <div class="m-auto colortable">
+                                        <div class="row ttr" style="padding: 10%; margin: auto;">
                                             
-                                        </tr>
-
-                                    </table>
-
-
+                                    </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -504,10 +530,24 @@
                 return val2 = $(this).data('val2');
             }).get();
 
-            var inpt ="<tr class='tr2'><th class='th2 p-2'><input type='color' value='" + val2 + "'></th></tr>"; 
 
-            $(".colortable>tbody>tr").append(inpt);
-            // alert(val2);
+                if ($('.clrop option').prop("selected") == true) {
+                // do something
+                alert('ssss');
+                var inpt ="<div class='th2 p-2'><input type='color' value='" + val2 + "'></div>"; 
+
+                $(".ttr").append(inpt);
+                    } else {
+                    // do something
+                    alert('dddd');
+                $(".ttr").remove();
+
+
+                }
+           
+
+            
+            alert(val2);
 
         });
 
