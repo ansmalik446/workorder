@@ -935,7 +935,7 @@
                 $.ajax({
 
                     type: 'get',
-                    url: '{{URL::to('user/get_previous')}}',
+                    url: '{{URL::to('admins/get_previous')}}',
                     data: {'id': id,'pro_id':pro_id},
 
                     success: function (data) {
