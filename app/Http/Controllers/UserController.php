@@ -111,22 +111,15 @@ class UserController extends Controller
             ->delete();
         $data2 = [];
         $roaster_data=[];
-        $fileName=[];
+        
         if($request->name !=null)
         {
-
+            
             foreach ($request->name as $item => $v) 
             {
        
           
-                if(isset($request->file[$item]))
-                {
-                    foreach($request->file[$item] as $file => $g) {
-                      
-                        $extension = $g->extension();
-                        $fileName= rand(11111, 99999) . "_." . $extension;
-                        $g->move('upload/roaster/', $fileName);
-                    }
+                
 
                 
              
@@ -135,30 +128,13 @@ class UserController extends Controller
                     
                         $roaster=roaster::create([
                         'name'=>$request->name[$item][0],
-                        'image'=>$fileName,
+                       
                         'order_id'=>$request->or_id,
 
 
 
                          ]);
 
-                }
-                elseif(isset($request->file2[$item]))
-                {
-                    
-                    $roaster=roaster::create([
-                    'name'=>$request->name[$item][0],
-                    'image'=>$request->file2[$item][0],
-                    'order_id'=>$request->or_id,
-                    ]);
-                }
-                else{
-                    $roaster=roaster::create([
-                    'name'=>$request->name[$item][0],
-                    'order_id'=>$request->or_id,
-                    ]);
-                    
-                }
                 
                 if($request->number !=null)
                 {
@@ -190,14 +166,15 @@ class UserController extends Controller
 
                 }    
                         
-                    
+                foreach ($roaster_data as $key => $value) {
+                    roaster_detail::insert($value);
+                }     
             }
 
 
-                foreach ($roaster_data as $key => $value) {
-                    roaster_detail::insert($value);
-                }
+                
         }
+
         else
         {
             return back()->with("error","Please  Add Atleast One Roster");;

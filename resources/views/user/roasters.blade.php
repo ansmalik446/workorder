@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-9">
                 <div class="d-flex justify-content-end align-items-center pl-4 pt-4">
-             <a href="{{url('/')}}"><button class="btn btn-primary print_btn2 mr-2 d-none" ></button></a>
+             <a href="{{url('/admins/')}}"><button class="btn btn-primary print_btn2 mr-2 d-none" type="button"></button></a>
              <input type="submit" value="Print And Save" name="btn_val" class="btn btn-primary print_btn1 mr-2 d-none " formtarget="_blank">
 
              <input type="button" value="Print And Save" name="btn_val" class="btn btn-primary print_btn mr-2">

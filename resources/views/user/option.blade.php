@@ -1,8 +1,9 @@
 @extends('user.layout.header')
 
-
-
 <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+
+
+
 <link rel="stylesheet" href="sweetalert2.min.css">
 <script src="sweetalert2.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
@@ -91,8 +92,15 @@
                         <input name="file" type="file" class="dropify" data-height="100" />
                         {{-- <img src="./img/uploadicon.png" class="img-fluid"> --}}
                     </div>
-                    <button type="button" class="btn btn-info" id="submit_form">Next</button>
-                    <button type="submit" class="btn btn-info d-none" id="submit_form2">Next</button>
+
+
+                    <button type="button" class="btn btn-info submit_form btn1"  val="1">Save/Print</button>
+                    <button type="button" class="btn btn-info submit_form btn2" val="2">Roaster</button>
+                    
+                    
+
+                    <input type="submit" value="Print And Save" name="btn_val" class="btn btn-primary print_btn1 d-none " >
+                    <input type="submit" value="roster" name="btn_val" class="btn btn-success print_btn2 d-none">
                 </div>
             </div>
             <!-- Place order section -->
@@ -469,6 +477,7 @@
 
 
 <!-- <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script> -->
+{{-- <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script> --}}
 
 <script>
     $(document).ready(function() {
@@ -830,33 +839,57 @@
              
             $(this).closest('.deleterow').remove();
         });
-        $(document).on('click', '#submit_form', function() {
+        $(document).on('click', '.submit_form', function() {
 
         
 
         var id = $("#orderNumber").val();
+        var val = $(this).attr('val');
         
 
-        
-            
+        $(this).text("Loading....");
+              
                 $.ajax({
                    type: 'get',
                     url: '{{URL::to('admins/check_order_id')}}',
                     data: {'id': id},
-                   success: function( msg ) {
+                    success: function( msg ) {
                         if(msg==200)
-                        {
+                        { 
+                            if(val==1)
+                            {
+                                $(".print_btn1").click();
 
-                           $("#submit_form2").click();
+                            }
+                            else{
+                                $(".print_btn2").click();
+
+                            }
+
+                           
                         }
                         if(msg==201)
                         {
+
+                            
+                                
+                                $(".btn1").text("Save/Print");
+
+                           
+                                $(".btn2").text("Roaster");
+
+                           
+
+
                             Swal.fire({
                                   icon: 'error',
                                   title: 'Oops...',
                                   text: 'Order Id Already Exists'
                                   
                                 })
+
+                            
+                            
 
                            
                         }

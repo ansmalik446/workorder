@@ -31,7 +31,7 @@
             {{-- <a href="{{url('rosters')}}"> <input type="button" value="Roster" class="btn btn-success mr-2 bg-success"></a> --}}
             {{-- <a href="{{url("print")}}"> <input type="button" value="print" class="btn btn-primary mr-2"></a> --}}
         </div>
-        <form action="{{url('user/add/edit_updat_order/' .$pre_data->id)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{url('admins/add/edit_updat_order/' .$pre_data->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-12 pt-5">
@@ -86,7 +86,13 @@
                         <input name="pre_file" type="hidden" value="{{$pre_data->file}}"  />
                         {{-- <img src="./img/uploadicon.png" class="img-fluid"> --}}
                     </div>
-                    <button type="submit" class="btn btn-info">Next</button>
+                    <button type="button" class="btn btn-info submit_form btn1"  val="1">Save/Print</button>
+                    <button type="button" class="btn btn-info submit_form btn2" val="2">Roaster</button>
+                    
+                    
+
+                    <input type="submit" value="Print And Save" name="btn_val" class="btn btn-primary print_btn1 d-none " >
+                    <input type="submit" value="roster" name="btn_val" class="btn btn-success print_btn2 d-none">
                 </div>
             </div>
             <!-- Place order section -->
@@ -995,6 +1001,31 @@
          $(document).on('click', '#deletelogo', function() {
              
             $(this).closest('.deleterow').remove();
+        });
+        $(document).on('click', '.submit_form', function() {
+
+         var val = $(this).attr('val');
+        
+
+       
+        
+
+        $(this).text("Loading....");
+              
+               
+        if(val==1)
+        {
+            $(".print_btn1").click();
+
+        }
+        else{
+            $(".print_btn2").click();
+
+        }
+
+                           
+                       
+             
         });
     });
 </script>
