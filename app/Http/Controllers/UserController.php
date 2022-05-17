@@ -113,7 +113,7 @@ class UserController extends Controller
         
         if($request->name !=null)
         {
-            
+
             foreach ($request->name as $item => $v) 
             {
        
@@ -230,111 +230,11 @@ class UserController extends Controller
             $loc3 =null;
 
         }
-        if(isset($request->po1))
-        {
-            $po1 =$request->po1;
-            $po1=implode(",",$po1);
-
-        }
-        else{
-            $po1 =null;
-
-        }
-        if(isset($request->po2))
-        {
-            $po2 =$request->po2;
-            $po2=implode(",",$po2);
-
-        }
-        else{
-            $po2 =null;
-
-        }
-        if(isset($request->po3))
-        {
-            $po3 =$request->po3;
-            $po3=implode(",",$po3);
-
-        }
-        else{
-            $po3 =null;
-
-        }
-        if(isset($request->po4))
-        {
-            $po4 =$request->po4;
-            $po4=implode(",",$po4);
-
-        }
-        else{
-            $po4 =null;
-
-        }
-        if(isset($request->co1))
-        {
-            $co1 =$request->co1;
-            $co1=implode(",",$co1);
-
-        }
-        else{
-            $co1 =null;
-
-        }
-        if(isset($request->co2))
-        {
-            $co2 =$request->co2;
-            $co2=implode(",",$co2);
-
-        }
-        else{
-            $co2 =null;
-
-        }
-        if(isset($request->co3))
-        {
-            $co3 =$request->co3;
-            $co3=implode(",",$co3);
-
-        }
-        else{
-            $co3 =null;
-
-        }
-        if(isset($request->co4))
-        {
-            $co4 =$request->co4;
-            $co4=implode(",",$co4);
-
-        }
-        else{
-            $co4 =null;
-
-        }
-        
-
-
-           //dd($request,$po1,$po3,$po2,$po4);
-
-            
-            //$table->text('wo_id')->nullable();
-            //$table->text('file')->nullable();
-            
-            //$table->text('logo1')->nullable();
-
         $rand=rand(11111, 99999); 
         $use=new place_order();
         $use->team_name=$request->team_name;
         $use->order_id=$request->order_id;
         $use->wo_id=$request->wo_id;
-
-        $use->po1=$po1;
-        $use->po2=$po2;
-        $use->po3=$po3;
-        $use->po4=$po4;
-        $use->co1=$co1;
-        $use->co2=$co2;
-        $use->co3=$co3;
-        $use->co4=$co4;
         $use->notes=$request->notes;
         $use->prod_id=$request->pro_id;
         
