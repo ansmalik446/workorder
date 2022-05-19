@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class product_option extends Model
 {
     use HasFactory;
+    public function Product()
+    {
+        return $this->belongsTo(Product::class,'prod_id','id');
+    }
 
     
 }

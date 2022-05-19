@@ -145,7 +145,10 @@
                     
                     
 
-                    <input type="submit" value="Print And Save" name="btn_val" class="btn btn-primary print_btn1 d-none " >
+                    <a href="{{ url('admins/')}}"><h1 class="print_btn3 d-none  mr-2"></h1></a>
+            
+
+                    <input type="submit" value="Print And Save" name="btn_val" class="btn btn-primary print_btn1 d-none" formtarget="_blank">
                     <input type="submit" value="roster" name="btn_val" class="btn btn-success print_btn2 d-none">
                 </div>
             </div>
@@ -159,6 +162,18 @@
                     <h3 class="productHeading pt-3 text-center">Product Options</h3>
                                    
                     <div class="px-3 py-2">
+                        <div class="form-group row">
+   
+    
+                                    <label for="location" class="col-sm-6 "><b>Product:</b></label>
+                                    <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
+                                        
+                                    
+                                    {{$products->name}}
+                                    </div>
+                               
+                                
+                            </div>
                         @php
                         $po=0;
                         
@@ -169,7 +184,7 @@
                             <div class="form-group row">
    
     
-                                    <label for="location" class="col-sm-5 mr-2"><b>{{$key}}:</b></label>
+                                    <label for="location" class="col-sm-6 "><b>{{$key}}:</b></label>
                                     <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
                                         <input type="hidden" name="key[{{$child}}]" value="{{$key}}">
                                     <select name="po1[{{$po}}][]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
@@ -219,12 +234,14 @@
                                         <label for="location" class="col-sm-5 mr-2"><b>{{$key}}:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
                                         <input type="hidden" name="key2[{{$child2}}]" value="{{$key}}">
-                                           
-                                            <select name="co1[{{$co}}][]" class="clrop select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
+                                            @php
+                                            $bu=str_replace(' ', '', $key);
+                                            @endphp
+                                            <select name="co1[{{$co}}][]" class="clrop select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple" data-val4=".{{$bu}}"  data-val3="{{$bu}}">
                                         
                                                 @foreach($value as $list5)    
                                                 
-                                                    <option value="{{$list5->id}}" data-val2="{{$list5->color}}">{{$list5->property}}</option>
+                                                    <option value="{{$list5->id}}" data-val2="{{$list5->color}}"  data-val3="{{$bu}}">{{$list5->property}}</option>
                                                 @endforeach
                                             </select>
                                         
@@ -495,7 +512,7 @@
                 <div class="logos mt-5 pt-5 bg-white">
                     <div class="row px-3">
                         <div class="col-12 pt-2 pb-4">
-                            <h3 class="text-center">Location</h3>
+                            <h3 class="text-center">logo</h3>
                             <button class="btn btn-info add_logo" type="button">Add Logo</button>
                         </div>
                     </div>
@@ -524,30 +541,27 @@
 <script>
     $(document).ready(function() {
         $(document).on('change', '.clrop', function() {
+           
+            
+            $(".colo").remove();
 
 
-            var options = $(this).find('option:selected').map(function() {
-                return val2 = $(this).data('val2');
-            }).get();
-
-
-                if ($('.clrop option').prop("selected") == true) {
-                // do something
-                alert('ssss');
-                var inpt ="<div class='th2 p-2'><input type='color' value='" + val2 + "'></div>"; 
-
+            var val2 =$('option:selected', this).attr('data-val2');
+            $('.clrop option:selected').each(function() {
+                var code=$(this).attr('data-val2');
+               
+               
+                var inpt ="<div class='th2 p-2 colo'><input type='color' value='" + code + "'></div>"; 
                 $(".ttr").append(inpt);
-                    } else {
-                    // do something
-                    alert('dddd');
-                $(".ttr").remove();
+            });          
+            
+              
 
-
-                }
+               
            
 
             
-            alert(val2);
+            
 
         });
 
@@ -866,7 +880,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="product"><b>Logo:</b></label>
+                                    <label for="product"><b>Location:</b></label>
                                     <input type="text" class="form-control form-control-sm" name="loc3[]" id="location">
                                 </div>
 
@@ -915,6 +929,7 @@
                             if(val==1)
                             {
                                 $(".print_btn1").click();
+                                $(".print_btn3").click();
 
                             }
                             else{
