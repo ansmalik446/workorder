@@ -110,10 +110,13 @@
     </tr>
     @php 
         $collection = collect($data->option);
+        $grouped = $collection->groupBy('product_option');
+        
+
         $collection_color = collect($data->option_color);
       
-        $grouped = $collection->groupBy('product_option');
-        $grouped_color = $collection->groupBy('product_option'); 
+        
+        $grouped_color = $collection_color->groupBy('product_option'); 
     @endphp
 
     @foreach($grouped as $key=>$po_value)
@@ -136,7 +139,7 @@
 
     </tr>
     <tr>
-        <td style="padding-left: 20px;">
+        <td style="padding-left: 20px;padding-bottom:5rem;">
             <p style="color:red;margin: 0px;"><span style="font-weight: bolder;color:red">{{$data->notes}}</p>
         </td>
     </tr>
@@ -197,19 +200,16 @@
 <table style="margin-left:1%;width: 100%;">
 <tbody>
     <tr style="margin-top: 10px; padding-left: 20px;">
-        <td style="background-color:{{$data->colo1}};border: 2px solid black;width: 16%; height: 80px;text-align: center;">
+        @foreach($grouped_color as $key_co=>$co_value)
+         @foreach($co_value as $co_row)
+        <td style="background-color:{{$co_row->option_porperty->color}};border: 2px solid black;width: 16%; height: 80px;text-align: center;">
             <p style="padding-top: 15px;color: white;">
             </p>
 
         </td>
-        <td style="background-color: {{$data->colo2}}; border: 2px solid black;width: 16%; height: 80px;text-align: center;">
-            <p style="padding-top: 15px;color: white;">
-            </p>
-        </td>
-        <td style="background-color: {{$data->colo3}};border: 2px solid black;width: 16%; height: 80px;text-align: center;">
-            <p style="padding-top: 15px;color: black;"></p>
-        </td>
-        <td></td>
+        @endforeach
+        @endforeach
+       
     </tr>
     
 </tbody>
@@ -236,32 +236,32 @@
         </td> --}}
     </tr>
     <tr>
-        <td style="padding-left: 20px;padding-top: 10px;">
+        <td style="padding-left: 20px;padding-top: 3px;">
             <p style="color: red;margin: 0px;"><span style="font-weight: bold;color: black;">Location: </span>{{$row_order_letter->location}}</p>
         </td>
     </tr>
     <tr>
-        <td style="padding-left: 20px;padding-top: 10px;">
+        <td style="padding-left: 20px;padding-top: 3px;">
             <p style="color: red;margin: 0px;"><span style="font-weight: bold;color: black;">Text: </span>{{$row_order_letter->text}}</p>
         </td>
     </tr>
     <tr>
-        <td style="padding-left: 20px;padding-top: 10px;">
+        <td style="padding-left: 20px;padding-top: 3px;">
             <p style="color: red;margin: 0px;"><span style="font-weight: bold;color: black;">Main color: </span>{{$row_order_letter->main_color}}</p>
         </td>
     </tr>
     <tr>
-        <td style="padding-left: 20px;padding-top: 10px;">
+        <td style="padding-left: 20px;padding-top: 2px;">
             <p style="color: red;margin: 0px;"><span style="font-weight: bold;color: black;">Trim color: </span>{{$row_order_letter->trim_color}}</p>
         </td>
     </tr>
     <tr>
-        <td style="padding-left: 20px;padding-top: 10px;">
+        <td style="padding-left: 20px;padding-top: 3px;">
             <p style="color: red;margin: 0px;"><span style="font-weight: bold;color: black;">Font: </span>{{$row_order_letter->font_name}}</p>
         </td>
     </tr>
     <tr>
-        <td style="padding-left: 20px;padding-top: 10px;">
+        <td style="padding-left: 20px;padding-top:3px;padding-bottom:1rem;">
             <p style="color: red;margin: 0px;"><span style="font-weight: bold;color: black;">Size (inches): </span>{{$row_order_letter->size}}</p>
         </td>
     </tr>
@@ -280,7 +280,7 @@
 
 </table>
 
-<table style="width:100%">    
+<table style="width:100%;page-break-before: always;">    
 <tbody>
     <!--<tr>-->
     <!--    <th scope="row" colspan="2">-->
@@ -319,18 +319,18 @@
                                        
                             
     <tr>
-        <td style="padding-left:20px;padding-top: 30px;">
+        <td style="padding-left:20px;padding-top:2px;">
             <img src="{{asset('upload/'.$file3[$key])}}" alt="" style="width: 50%;">
         </td>
     </tr>
     <tr>
         <td style="padding-left: 20px;">
-            <p style="color: red;"><span style="font-weight: bold;color: black;">- Size</span>{{$ex[$key]}}</p>
+            <p style="color: red;margin-top: 3px;"><span style="font-weight: bold;color: black;">- Size:</span>{{$ex[$key]}}</p>
         </td>
     </tr>
     <tr>
         <td style="padding-left: 20px;">
-            <p style="color: red;"><span style="font-weight: bold;color: black;"><span style="color: red;">-</span> Location: </span>{{$loc3[$key]}}</p>
+            <p style="color: red;margin-top: 3px;"><span style="font-weight: bold;color: black;"><span style="color: red;">-</span> Location: </span>{{$loc3[$key]}}</p>
         </td>
     </tr>
     
@@ -383,7 +383,7 @@
     <tr>
         <td style="padding-left: 20px; width: 100%;padding-right: 20px;">
             @foreach($data->roaster as $roy_detail)
-            <table class="table2" style="width: 100%;">
+            <table class="table2" style="width: 100%;margin-bottom: 1rem;">
                 <thead>
                     <tr class="tr2">
                     <td class="td2" style="border: 2px solid black;padding: 10px;text-align: center;color: red;" colspan="5"><b>{{$roy_detail->name}}</b> </td>

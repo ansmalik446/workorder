@@ -10,7 +10,8 @@ use App\Models\product_option;
 use App\Models\place_order;
 use App\Models\order_lettering;
 
-
+use App\Models\Order_plac;
+use App\Models\Order_plac_color;
 use App\Models\roaster_detail;
 use Auth;
 use DB;
@@ -68,86 +69,7 @@ class ordercontroler extends Controller
             $loc3 =null;
 
         }
-        if(isset($request->po1))
-        {
-            $po1 =$request->po1;
-            $po1=implode(",",$po1);
-
-        }
-        else{
-            $po1 =null;
-
-        }
-        if(isset($request->po2))
-        {
-            $po2 =$request->po2;
-            $po2=implode(",",$po2);
-
-        }
-        else{
-            $po2 =null;
-
-        }
-        if(isset($request->po3))
-        {
-            $po3 =$request->po3;
-            $po3=implode(",",$po3);
-
-        }
-        else{
-            $po3 =null;
-
-        }
-        if(isset($request->po4))
-        {
-            $po4 =$request->po4;
-            $po4=implode(",",$po4);
-
-        }
-        else{
-            $po4 =null;
-
-        }
-        if(isset($request->co1))
-        {
-            $co1 =$request->co1;
-            $co1=implode(",",$co1);
-
-        }
-        else{
-            $co1 =null;
-
-        }
-        if(isset($request->co2))
-        {
-            $co2 =$request->co2;
-            $co2=implode(",",$co2);
-
-        }
-        else{
-            $co2 =null;
-
-        }
-        if(isset($request->co3))
-        {
-            $co3 =$request->co3;
-            $co3=implode(",",$co3);
-
-        }
-        else{
-            $co3 =null;
-
-        }
-        if(isset($request->co4))
-        {
-            $co4 =$request->co4;
-            $co4=implode(",",$co4);
-
-        }
-        else{
-            $co4 =null;
-
-        }
+        
 
 
         $rand=rand(11111, 99999);
@@ -156,21 +78,8 @@ class ordercontroler extends Controller
         $use->team_name=$request->team_name;
         $use->wo_id=$request->wo_id;
         $use->order_id=$request->order_id;  
-
-        $use->po1=$po1;
-        $use->po2=$po2;
-        $use->po3=$po3;
-        $use->po4=$po4;
-        $use->co1=$co1;
-        $use->co2=$co2;
-        $use->co3=$co3;
-        $use->co4=$co4;
         $use->notes=$request->notes;
         $use->prod_id=$request->pro_id;
-        
-        $use->colo1=$request->colo1;
-        $use->colo2=$request->colo2;
-        $use->colo3=$request->colo3;
         $use->loc3=$loc3;
         $use->size3=$size3;
         $use->logo3 =$logo3;
@@ -269,7 +178,75 @@ class ordercontroler extends Controller
 
         //       $prev_ros=roaster::where('order_id',$prev_id)->get();
         // dd($prev_ros);
-            return redirect()->route('edit_roster_dub', ['id' => $use->id,'prev_id'=>$prev_id]);
+        $cont1=count($request->key);
+        for($i=0; $i< $cont1; $i++ )
+            {
+                // echo "<pre>";
+
+                if(isset($request->po1[$i]))
+                {
+                    // var_dump($request->key[$i]);
+                    
+                    
+                    $count2 = count($request->po1[$i]);
+                    
+                    for($j=0; $j< $count2; $j++ )
+                    {
+                        $ordr = new Order_plac;
+
+                        $ordr->place_order_id = $use->id;
+                        $ordr->product_option = $request->key[$i];
+                        $ordr->poductid = $request->po1[$i][$j];
+                        $ordr->save();
+                        // var_dump($request->po1[$i][$j]);
+                        
+
+                    }
+                
+                }
+            }
+            $cont3=count($request->key2);
+
+            for($i=0; $i< $cont3; $i++ )
+            {
+                // echo "<pre>";
+
+                if(isset($request->co1[$i]))
+                {
+                    // var_dump($request->key2[$i]);
+                    
+                    
+                    $count4 = count($request->co1[$i]);
+                    
+                    for($j=0; $j< $count4; $j++ )
+                    {
+                        $ordr = new Order_plac_color;
+
+                        $ordr->place_order_id = $use->id;
+                        $ordr->product_option = $request->key2[$i];
+                        $ordr->poductid = $request->co1[$i][$j];
+                        $ordr->save();
+                        // var_dump($request->po1[$i][$j]);
+                        
+
+                    }
+                
+                }
+            }
+            //  die();
+
+            // 
+            if($request->btn_val =='Print And Save')
+            {
+                return redirect()->route('save_print', ['id' => $use->id]);
+            }
+            else
+            {
+               
+                return redirect()->route('edit_roster_dub', ['id' => $use->id,'prev_id'=>$prev_id]);
+
+            }    
+            
 
            
 
