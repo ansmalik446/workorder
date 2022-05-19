@@ -1,4 +1,4 @@
-@extends(Auth::user()->role=="user" ? 'user.dash_layouts.main' : ((Auth::user()->role == "admin") ? '../Admin_asstes.layouts.main' : '../Admin_asstes.layouts.main'))
+@extends(Auth::user()->role=="admins" ? 'user.dash_layouts.main' : ((Auth::user()->role == "superadmin") ? '../Admin_asstes.layouts.main' : '../Admin_asstes.layouts.main'))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">

@@ -15,7 +15,7 @@
                 <h4>User</h4>
             </div>
             <div class="card-content p-3">
-                <form action="{{url('admin/update_user')}}" method="POST">
+                <form action="{{url('superadmin/update_user')}}" method="POST">
                     @csrf
                     <div class="row p-3">
                         <div class="col-lg-12 col-12 mt-2">

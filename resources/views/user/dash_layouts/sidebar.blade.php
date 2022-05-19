@@ -1,7 +1,7 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="{{url('/admin/index')}}">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="{{url('/admins/index')}}">
                     <div class="" ></div>
                     <h2 class="brand-text mb-0">@if (isset(Auth::user()->name)) {{Auth::user()->name}}  @else WorkOrder @endif</h2>
 

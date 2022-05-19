@@ -67,9 +67,9 @@
                                 <td>
 
 
-                                    <a href="{{url('admin/edit_sports/'.$header->id)}}"  class="btn btn-primary ml-lg-1 ml-md-1 mt-1">Edit</a>
+                                    <a href="{{url('superadmin/edit_sports/'.$header->id)}}"  class="btn btn-primary ml-lg-1 ml-md-1 mt-1">Edit</a>
 
-                                    <a href="{{url('admin/delete_sports/'.$header->id)}}" onclick="return confirm('Are you sure you want to delete this Sports?');" class="btn btn-danger ml-lg-1 ml-md-1 mt-1">Delete</a>
+                                    <a href="{{url('superadmin/delete_sports/'.$header->id)}}" onclick="return confirm('Are you sure you want to delete this Sports?');" class="btn btn-danger ml-lg-1 ml-md-1 mt-1">Delete</a>
 
 
                                 </td>
@@ -126,7 +126,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{url('admin/add_sports')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('superadmin/add_sports')}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row p-3">
