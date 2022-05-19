@@ -850,6 +850,7 @@
              
             $(this).closest('.deleterow').remove();
         });
+        
         $(document).on('click', '.submit_form', function() {
 
          var val = $(this).attr('val');

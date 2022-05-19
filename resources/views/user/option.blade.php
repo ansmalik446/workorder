@@ -173,7 +173,7 @@
                                     </div>
                                
                                 
-                            </div>
+                        </div>
                         @php
                         $po=0;
                         
@@ -187,20 +187,20 @@
                                     <label for="location" class="col-sm-6 "><b>{{$key}}:</b></label>
                                     <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
                                         <input type="hidden" name="key[{{$child}}]" value="{{$key}}">
-                                    <select name="po1[{{$po}}][]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
-                                    @foreach($value as $propr3)    
-                                        <option value="{{$propr3->id}}">{{$propr3->property}}</option>
-                                    @endforeach
-                                    </select>
+                                        <select name="po1[{{$po}}][]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
+                                        @foreach($value as $propr3)    
+                                            <option value="{{$propr3->id}}">{{$propr3->property}}</option>
+                                        @endforeach
+                                        </select>
                                     </div>
                                
                                 
                             </div>
                             @php
-                        $po++;
-                        $child++;
+                            $po++;
+                            $child++;
 
-                        @endphp
+                            @endphp
                         @endforeach
 
                              
@@ -221,11 +221,11 @@
                         <div class="colorOptions">
                             <h3 class="optionsHeading pt-3 text-center">Color Options</h3>
                             <div class="px-3 py-2">
-                            @php
-                            $co=0;
-                            
-                            $child2=0;
-                            @endphp
+                                @php
+                                $co=0;
+                                
+                                $child2=0;
+                                @endphp
                                 @foreach($color_version as $key => $value)
 
                                     <div class="form-group row">
@@ -255,10 +255,6 @@
                                     @endphp
 
                                 @endforeach 
-                             
-
-
-
 
                                 <div class="form-group">                            
                                     <div class="m-auto colortable">
@@ -909,6 +905,7 @@
              
             $(this).closest('.deleterow').remove();
         });
+        
         $(document).on('click', '.submit_form', function() {
 
         
