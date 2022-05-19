@@ -82,7 +82,14 @@ section.productFeatures {
                         <input name="pre_file" type="hidden" value="{{$pre_data->file}}"  />
                         {{-- <img src="./img/uploadicon.png" class="img-fluid"> --}}
                     </div>
-                    <button type="submit" class="btn btn-info">Next</button>
+                    <button type="button" class="btn btn-info submit_form btn1"  val="1">Save/Print</button>
+                    <button type="button" class="btn btn-info submit_form btn2" val="2">Roaster</button>
+                    
+                    <a href="{{ url('admins/')}}"><h1 class="print_btn3 d-none  mr-2"></h1></a>
+            
+
+                    <input type="submit" value="Print And Save" name="btn_val" class="btn btn-primary print_btn1 d-none" formtarget="_blank">
+                    <input type="submit" value="roster" name="btn_val" class="btn btn-success print_btn2 d-none">
                 </div>
             </div>
             <!-- Place order section -->
@@ -95,193 +102,70 @@ section.productFeatures {
                 <div class="productOptions">
                     <h3 class="productHeading pt-3 text-center">Product Options</h3>
                     <div class="px-3 py-2">
-                        @php
-                                        $po1=0;
-                                        $po2=0;
-                                        $po3=0;
-                                        $po4=0;
-                                        $co1=0;
-                                        $co2=0;
-                                        $co3=0;
-                                        $co4=0;
-                                    @endphp
-                                    @foreach($data as $row)
-                                        @if($row->parent=='Product Option' && $row->chalid=='Fabric Choice')
-                                        @php
-                                            $po1++;
-                                        
-                                        @endphp
-                                        
-                                        @endif
-                                        @if($row->parent=='Product Option' && $row->chalid=='Neck Style')
-                                            @php
-                                            $po2++;
-                                        
-                                            @endphp
-                                        
-                                        @endif
-                                        @if($row->parent=='Product Option' && $row->chalid=='Jersy Fit')
-                                            @php
-                                            $po3++;
-                                        
-                                            @endphp
-                                   
-                                        @endif
-                                        @if($row->parent=='Product Option' && $row->chalid=='Short Inseam')
-                                            @php
-                                            $po4++;
-                                        
-                                            @endphp
-                                       
-                                        @endif
-                                        @if($row->parent=='Color Version' && $row->chalid=='Neck')
-                                            @php
-                                                $co1++;
-                                        
-                                            @endphp
-
-                                        @endif
-                                        @if($row->parent=='Color Version' && $row->chalid=='Acent')
-                                            @php
-                                                $co2++;
-                                        
-                                            @endphp
-
-                                        @endif
-                                        @if($row->parent=='Color Version' && $row->chalid=='Bu logo')
-                                            @php
-                                                $co3++;
-                                        
-                                            @endphp
-
-                                        @endif
-                                        @if($row->parent=='Color Version' && $row->chalid=='Body')
-                                            @php
-                                                $co4++;
-                                        
-                                            @endphp
-
-
-                                        @endif
-                                    @endforeach
-                             
-                            
-                        @if($po1!=0)
-                             <div class="form-group row">
+                        <div class="form-group row">
    
     
-                                    <label for="location" class="col-sm-6"><b>Fabric Choice:</b></label>
+                                    <label for="location" class="col-sm-6 "><b>Product:</b></label>
                                     <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                       
-                                       
-
                                         
-                                    <select name="po1[]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
-                                
-                                        @php
-                                            $fabric=explode(",",$pre_data->po1);
-
-                                        @endphp
-                                        @foreach($data as $row)
-                                        
-                                        @if($row->parent=='Product Option' && $row->chalid=='Fabric Choice')
-                                        
-                                        
-                                        
-                                        <option value="{{$row->id}}"
-                                            {{ in_array($row->property,$fabric, TRUE) ? 'selected' : '' }} 
-                                        >{{$row->property}}</option>
-                                        @endif
-                                       
-                                        @endforeach
-
-                                    </select>
-                                
-                                </div>
+                                    
+                                    {{$products->name}}
+                                    </div>
+                               
                                 
                             </div>
-                        @endif
-                        @if($po2!=0)   
+                             
+                            
+                       @php
+                        $po=0;
+                        
+                        $child=0;
+                        $get_po=array();
+                        
+                            $fabric=$pre_data->option;
+                            $collection = collect($fabric);
+                            foreach($collection as $row_collection)
+                            {
+                               
+                                $get_po[]=intval($row_collection->poductid);
+
+
+                            }
+                                            
+                        @endphp
+                                      
+                        @foreach ($product_option as $key => $value)
+
+
+                        
                             <div class="form-group row">
    
     
-                                    <label for="location" class="col-sm-6"><b>Neck Style:</b></label>
+                                    <label for="location" class="col-sm-6"><b>{{$key}}:</b></label>
                                     <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                    @php
-                                        $neck=explode(",",$pre_data->po2);
-                                    @endphp   
-                                    <select name="po2[]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
-                                
-                                        @foreach($data as $row)
-                                        @if($row->parent=='Product Option' && $row->chalid=='Neck Style')
-                                        <option value="{{$row->id}}"
-                                            {{ in_array($row->property,$neck, TRUE) ? 'selected' : '' }}
-
-                                            >{{$row->property}}</option>
-                                        @endif
+                                        <input type="hidden" name="key[{{$child}}]" value="{{$key}}">
+                                        <select name="po1[{{$po}}][]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
+                                        @foreach($value as $propr3)    
+                                               <option value="{{$propr3->id}}"  {{ in_array($propr3->id,$get_po, TRUE) ? 'selected' : '' }} >{{$propr3->property}}</option>
                                         @endforeach
-                                    </select>
-                                
-                                </div>
+                                        </select>
+                                    </div>
                                
-                            </div>
-                        @endif
-                        @if($po3!=0)    
-                             <div class="form-group row">
-   
-    
-                                    <label for="location" class="col-sm-6"><b>Jersey Fit/Style:</b></label>
-                                    <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                        @php
-                                            $jersey=explode(",",$pre_data->po3);
-                                        @endphp
-                                    <select name="po3[]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
-                                
-                                        @foreach($data as $row)
-                                        @if($row->parent=='Product Option' && $row->chalid=='Jersy Fit')
-                                        <option value="{{$row->id}}"
-                                            {{ in_array($row->property,$jersey, TRUE) ? 'selected' : '' }}
-
-                                            >{{$row->property}}</option>
-                                        @endif
-                                        @endforeach
-                                    </select>
-                                
-                                </div>
                                 
                             </div>
-                        @endif
-                        @if($po4!=0)    
-                             <div class="form-group row">
-   
-    
-                                <label for="location" class="col-sm-6"><b>Short Inseam:</b></label>
-                                <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                        @php
-                                            $short=explode(",",$pre_data->po4);
-                                        @endphp
-                                    <select name="po4[]" class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple">
-                                
-                                        @foreach($data as $row)
-                                        @if($row->parent=='Product Option' && $row->chalid=='Short Inseam')
-                                        <option value="{{$row->id}}"
-                                            {{ in_array($row->property,$short, TRUE) ? 'selected' : '' }}
+                            @php
+                        $po++;
+                        $child++;
 
-                                            >{{$row->property}}</option>
-                                        @endif
-                                        @endforeach
-                                    </select>
-                               
-                                </div>
-                               
-                            </div>
-                        @endif    
+                        @endphp
+                        @endforeach
                         <div class="">
 
                             <div class="form-group">
                                 <label for="location" class=""><b>Additional Notes:</b></label>
                                 <div class="">
-                                <textarea class="form-control" id="notes" rows="3"  name="notes">{{$row->notes}}</textarea>
+                                <textarea class="form-control" id="notes" rows="3"  name="notes">{{$pre_data->notes}}</textarea>
+
                             </div>
                             </div>
                            
@@ -293,130 +177,68 @@ section.productFeatures {
                         <div class="colorOptions">
                             <h3 class="optionsHeading pt-3 text-center">Color Options</h3>
                             <div class="px-3 py-2">
-                                @if($co1!=0)
-                                    
-
-                                       <div class="form-group row">
-   
-    
-                                        <label for="location" class="col-sm-6"><b>Neck:</b></label>
-                                        <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                                @php
-                                                    $color_neck=explode(",",$pre_data->co1);
-                                                @endphp
-                                            <select class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple" name="co1[]">
-                                        
-                                                @foreach($data as $row)
-                                                @if($row->parent=='Color Version' && $row->chalid=='Neck')
-                                                <option value="{{$row->id}}"
-                                                    {{ in_array($row->property,$color_neck, TRUE) ? 'selected' : '' }}
-
-                                                    >{{$row->property}}</option>
-                                                @endif
-                                                @endforeach
-                                            </select>
-                                        
-                                        </div>
-                                        
-                                    </div>
-                                @endif  
-                                @if($co2!=0)  
-                                    <div class="form-group row">
-   
-    
-                                        <label for="location" class="col-sm-6"><b>Accent:</b></label>
-                                        <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                                @php
-                                                    $color_accent=explode(",",$pre_data->co2);
-                                                @endphp
-                                           
-                                            <select class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple" name="co2[]">
-                                        
-                                                @foreach($data as $row)
-                                                @if($row->parent=='Color Version' && $row->chalid=='Acent')
-                                                <option value="{{$row->id}}"
-                                                     {{ in_array($row->property,$color_accent, TRUE) ? 'selected' : '' }}
-                                                >{{$row->property}}</option>
-                                                @endif
-                                                @endforeach
-                                            </select>
-                                       
-                                        </div>
-                                       
-                                    </div>
-                                @endif
-                                @if($co3!=0)        
-                                    <div class="form-group row">
-   
-    
-                                        <label for="location" class="col-sm-6"><b>BU Logo:</b></label>
-                                       
-                                            <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                                @php
-                                                    $bu_logo=explode(",",$pre_data->co3);
-                                                @endphp
-                                            
-                                            <select class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple" name="co3[]">
-                                        
-                                                @foreach($data as $row)
-                                                @if($row->parent=='Color Version' && $row->chalid=='Bu logo')
-                                                <option value="{{$row->id}}"
-                                                     {{ in_array($row->property,$bu_logo, TRUE) ? 'selected' : '' }}
-                                                >{{$row->property}}</option>
-                                                @endif
-                                                @endforeach
-                                            </select>
-                                        
-                                        </div>
-                                       
-                                    </div>
-                                @endif
-                                @if($co4!=0)        
+                                 @php
+                                    $co=0;
                                 
+                                    $child2=0;
+
+                                    $get_co=array();
+                        
+                                    $col=$pre_data->option_color;
+                                    $collection_col = collect($col);
+                                    foreach($collection_col as $row_collection_col)
+                                    {
+                                       
+                                        $get_co[]=intval($row_collection_col->poductid);
+
+
+                                    }
+                                    //dd($get_co);
+                                @endphp
+                                @foreach($color_version as $key => $value)
+
                                     <div class="form-group row">
    
     
-                                        <label for="location" class="col-sm-6"><b>BODY:</b></label>
+                                        <label for="location" class="col-sm-5 mr-2"><b>{{$key}}:</b></label>
                                         <div class="col-sm-6 pl-xs-3 pl-md-0" style="">
-                                                @php
-                                                    $body=explode(",",$pre_data->co4);
-                                                @endphp
-                                            
-                                            <select class="select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple" name="co4[]">
+                                        <input type="hidden" name="key2[{{$child2}}]" value="{{$key}}">
+                                            @php
+                                            $bu=str_replace(' ', '', $key);
+
+                                            @endphp
+                                            <select name="co1[{{$co}}][]" class="clrop select2-multiple form-control form-control-sm" aria-label=".form-control-sm example" multiple="multiple" data-val4=".{{$bu}}"  data-val3="{{$bu}}">
                                         
-                                                @foreach($data as $row)
-                                                @if($row->parent=='Color Version' && $row->chalid=='Body')
-                                                <option value="{{$row->id}}"
-                                                     {{ in_array($row->property,$body, TRUE) ? 'selected' : '' }}>{{$row->property}}</option>
-                                                @endif
+                                                @foreach($value as $list5)    
+                                                
+                                                    <option value="{{$list5->id}}" data-val2="{{$list5->color}}"  data-val3="{{$bu}}" {{ in_array($list5->id,$get_co, TRUE) ? 'selected' : '' }}>{{$list5->property}}</option>
                                                 @endforeach
                                             </select>
+                                        
                                         </div>
-                                       
+                                        
                                     </div>
-                                @endif
+                                    @php
+                                    $co++;
+                                    $child2++;
+
+                                    @endphp
+                                @endforeach 
+                             
 
 
 
+                                
+                                <div class="form-group">                            
+                                    <div class="m-auto colortable">
+                                        <div class="row ttr" style="padding: 10%; margin: auto;">
+                                            @foreach($pre_data->option_color as $code)
+                                            <div class='th2 p-2 colo'><input type='color' value="{{$code->option_porperty->color}}"></div>
+                                            @endforeach
 
-                                <div class="form-group">
-
-                                    <table class="m-auto">
-                                        <tr class="tr2">
-                                            <th class="th2 p-2">
-                                                <input type="color" name="colo1" value="{{$pre_data->colo1}}">
-                                            </th>
-                                            <th class="th2 p-2">
-                                                <input type="color" name="colo2" value="{{$pre_data->colo2}}">
-                                            </th>
-                                            <th class="th2 p-2">
-                                                <input type="color" name="colo3" value="{{$pre_data->colo3}}">
-                                            </th>
-                                        </tr>
-
-                                    </table>
-
-
+                                            
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -999,6 +821,57 @@ section.productFeatures {
          $(document).on('click', '#deletelogo', function() {
              
             $(this).closest('.deleterow').remove();
+        });
+        $(document).on('click', '.submit_form', function() {
+
+         var val = $(this).attr('val');
+        
+
+       
+        
+
+        $(this).text("Loading....");
+              
+               
+        if(val==1)
+        {
+            $(".print_btn1").click();
+            $(".print_btn3").click();
+            
+
+        }
+        else{
+            $(".print_btn2").click();
+
+        }
+
+                           
+                       
+             
+        });
+        $(document).on('change', '.clrop', function() {
+           
+            
+            $(".colo").remove();
+
+
+            var val2 =$('option:selected', this).attr('data-val2');
+            $('.clrop option:selected').each(function() {
+                var code=$(this).attr('data-val2');
+               
+               
+                var inpt ="<div class='th2 p-2 colo'><input type='color' value='" + code + "'></div>"; 
+                $(".ttr").append(inpt);
+            });          
+            
+              
+
+               
+           
+
+            
+            
+
         });
          
     });

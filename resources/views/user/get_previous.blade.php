@@ -483,6 +483,30 @@ section.productFeatures {
       </script>
 <script>
     $(document).ready(function() {
+        $(document).on('change', '.clrop', function() {
+           
+            
+            $(".colo").remove();
+
+
+            var val2 =$('option:selected', this).attr('data-val2');
+            $('.clrop option:selected').each(function() {
+                var code=$(this).attr('data-val2');
+               
+               
+                var inpt ="<div class='th2 p-2 colo'><input type='color' value='" + code + "'></div>"; 
+                $(".ttr").append(inpt);
+            });          
+            
+              
+
+               
+           
+
+            
+            
+
+        });
         $('#btn_text').click(function() {
             var val = $(".add-new-product1").attr('val');
             
