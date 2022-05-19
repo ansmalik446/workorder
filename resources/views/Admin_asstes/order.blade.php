@@ -9,7 +9,7 @@
 
         {{-- <div class="row">
             <div class="col-lg-12">
-               <a href="{{url('admin/order_detail')}}"> <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#exampleModal">
+               <a href="{{url('superadmin/order_detail')}}"> <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#exampleModal">
                     Order Detail
                   </button></a>
             </div>
@@ -139,7 +139,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{url('admin/adduser')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('superadmin/adduser')}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row p-3">

@@ -15,7 +15,7 @@
         <h4>Footer</h4>
     </div>
     <div class="card-content p-3">
-        <form action="{{url('admin/update_footer')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{url('superadmin/update_footer')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
          <div class="row p-3">

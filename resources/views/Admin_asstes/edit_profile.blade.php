@@ -18,7 +18,7 @@
                 <h4>Update profile</h4>
             </div>
             <div class="card-content p-3">
-                <form action="{{url('admin/update/profile')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url('superadmin/update/profile')}}" method="POST" enctype="multipart/form-data">
 @csrf
                  <div class="row p-3">
 
@@ -69,7 +69,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{url('admin/update/password')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('superadmin/update/password')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" 
                 value="{{auth()->user()->id}}" class="form-control">

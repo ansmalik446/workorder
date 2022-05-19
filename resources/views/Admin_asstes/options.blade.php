@@ -75,7 +75,7 @@
                             --}}
                         </div>
                         <div class="card-body">
-                            <form action="{{url('admin/add_option')}}" enctype="multipart/form-data" method="POST">
+                            <form action="{{url('superadmin/add_option')}}" enctype="multipart/form-data" method="POST">
                                 @csrf
                                 <div class="row ">
                                     <div class="col-lg-12 col-12 mt-2">

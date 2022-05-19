@@ -46,6 +46,16 @@ class optionController extends Controller
         $id=$request->id;
         return view('Admin_asstes.get_edit_product' ,compact('id','products','parent','chalid','p_id'));
     }
+    function get_edit_product2(Request $request){
+        //dd($request->id,$request->id2);
+        $products=product_option::where('parent',$request->id)->where('chalid',$request->id2)->where('product_id',$request->p_id)->get();
+        $parent=$request->id;
+        $chalid=$request->id2;
+        $p_id=$request->p_id;
+        //dd($products);
+        $id=$request->id;
+        return view('Admin_asstes.get_edit_product2' ,compact('id','products','parent','chalid','p_id'));
+    }
     function update_product_option(Request $request){
        //dd($request);
         DB::table('product_options')
@@ -80,6 +90,42 @@ class optionController extends Controller
            
 
     }
+
+    function update_product_option2(Request $request){
+        //dd($request);
+         DB::table('product_options')
+             ->where('product_id', $request->product_id)
+             ->where('parent', $request->parent)
+             ->where('chalid', $request->chalid)
+             ->where('property', $request->name)
+             ->delete();
+            
+             for($i=0; $i < count($request->name);  $i++)
+             {
+                   
+                if($request->propert!="")
+                {
+                   $user=new product_option();
+                   $user->product_id=$request->product_id;
+         
+                   $user->parent=$request->parent;
+        
+                   $user->chalid=$request->chalid;
+                   $user->color=$request->color;
+                   $user->property=$request->propert;
+                  
+                   $user->save();
+                }
+            }
+         
+             if($user->save()){
+                 return response()->json(200);
+             }
+             
+        
+            
+ 
+     }
 
     
     function add_prod_option(Request $request){

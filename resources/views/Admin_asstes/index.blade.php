@@ -7,7 +7,7 @@
         <div class="col-lg-4 col-sm-4 col-12">
             <div class="card">
                 <div class="card-header  align-items-start p-2">
-                    <h2>{{App\Models\User::where('role','user')->count()}}</h2>
+                    <h2>{{App\Models\User::where('role','admins')->count()}}</h2>
                     <p>Users</p>
                 </div>
 

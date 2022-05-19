@@ -66,7 +66,7 @@
                                 <div class="float-right">
                                     <i class="fas fa-plus mr-1 pluscolor pro_op" val="{{$list2->parent}}" val2="{{$list2->child}}">
                                     </i>
-                                    <i class="fas fa-edit editcolor pro_edit" val="{{$list2->parent}}" val2="{{$list2->child}}" val3="{{$id}}">
+                                    <i class="fas fa-edit editcolor pro_edit2" val="{{$list2->parent}}" val2="{{$list2->child}}" val3="{{$id}}">
                                     </i>
                                 </div>
                             </div>
@@ -277,6 +277,45 @@
             </div>
 
 
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="xlarge2" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Update Color Option
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                <span aria-hidden="true">
+                                    ×
+                                </span>
+                            </button>
+                        </div>
+                        <form  method="POST" enctype="multipart/form-data" id="myform5">
+                        @csrf
+                        <div class="modal-body" id="products_op2">
+                           
+
+              
+                                
+                            
+                        </div>
+                        <div class="modal-footer">
+                            {{--
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                                Close
+                            </button>
+                            --}}
+                            <button class="btn btn-primary btnSubmit5" type="submit">
+                                Add
+                            </button>
+                            
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
 
             <div aria-hidden="true" aria-labelledby="exampleModaloptionLabel" class="modal fade" id="exampleModaloption" role="dialog" tabindex="-1">
                 <div class="modal-dialog" role="document">
@@ -439,6 +478,7 @@
 
                 
             });
+            
             $('.prod_op').on('click', function () {
                 jQuery.noConflict();
                 $('#exampleModaloption').modal('show');
@@ -476,6 +516,28 @@
                 });
             });
             
+            $('.pro_edit2').on('click', function () {
+
+                var id = $(this).attr('val');
+                var id2 = $(this).attr('val2');
+                var p_id = $(this).attr('val3');
+                
+                $.ajax({
+
+                    type: 'get',
+                    url: '{{URL::to('superadmin/get_edit_product2')}}',
+                    data: {'id':id,'id2':id2,'p_id':p_id},
+
+                    success: function (data) {
+                        jQuery.noConflict();
+                        $('#products_op2').empty().append(data);
+                        $('#xlarge2').modal('show');
+
+                    },
+
+
+                });
+            });
 
 
 
@@ -586,6 +648,52 @@
     });
 
 
+    $(".btnSubmit5").click(function (event) {
+ 
+        
+    event.preventDefault();
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    var data = $('#myform5').serializeArray();
+
+
+    console.log(data);
+
+
+
+
+    $("#btnSubmit5").prop("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: '{{URL::to('superadmin/update_product_option2')}}',
+        data: data,
+        success: function (data) {
+            $('#xlarge2').modal('hide');
+            swal("Success", "Request Submitted Successfully!", "success");
+
+
+            
+
+        },
+        error: function (e) {
+
+            swal ( "Oops" ,  "Something went wrong!" ,  "error" )
+
+
+        }
+    });
+
+    });
+
+
+
     $(".btnSubmit3").click(function (event) {
  
        
@@ -675,10 +783,6 @@
         });
 
     });
-
-
-
-    
  
 });
 </script>

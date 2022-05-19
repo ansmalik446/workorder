@@ -68,9 +68,9 @@
                                 <td>
 
 
-                                    <a href="{{url('admin/edit_product/'.$header->id)}}"  class="btn btn-primary ml-lg-1 ml-md-1 mt-1">Edit</a>
+                                    <a href="{{url('superadmin/edit_product/'.$header->id)}}"  class="btn btn-primary ml-lg-1 ml-md-1 mt-1">Edit</a>
 
-                                    <a href="{{url('admin/delete_product/'.$header->id)}}" class="btn btn-danger ml-lg-1 ml-md-1 mt-1" onclick="return confirm('Are you sure you want to delete this Product?');">Delete</a>
+                                    <a href="{{url('superadmin/delete_product/'.$header->id)}}" class="btn btn-danger ml-lg-1 ml-md-1 mt-1" onclick="return confirm('Are you sure you want to delete this Product?');">Delete</a>
 
 
                                 </td>

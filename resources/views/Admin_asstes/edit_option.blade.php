@@ -20,7 +20,7 @@
                 <h4>Options</h4>
             </div>
             <div class="card-content p-3">
-                <form action="{{url('admin/update_option')}}" method="POST">
+                <form action="{{url('superadmin/update_option')}}" method="POST">
                     <input type="hidden" name="id" value="{{$option->id}}">
                     @csrf
                     <div class="row p-3">
@@ -142,7 +142,7 @@
             $.ajax({
 
     type:'get',
-    url:'{{URL::to('admin/get_product')}}',
+    url:'{{URL::to('superadmin/get_product')}}',
     data:{'id':id},
 
     success:function(data){
