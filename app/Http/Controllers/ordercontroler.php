@@ -178,59 +178,67 @@ class ordercontroler extends Controller
 
         //       $prev_ros=roaster::where('order_id',$prev_id)->get();
         // dd($prev_ros);
-        $cont1=count($request->key);
-        for($i=0; $i< $cont1; $i++ )
+            if(isset($request->key))
             {
-                // echo "<pre>";
 
-                if(isset($request->po1[$i]))
+                $cont1=count($request->key);
+
+                for($i=0; $i< $cont1; $i++ )
                 {
-                    // var_dump($request->key[$i]);
-                    
-                    
-                    $count2 = count($request->po1[$i]);
-                    
-                    for($j=0; $j< $count2; $j++ )
+                    // echo "<pre>";
+
+                    if(isset($request->po1[$i]))
                     {
-                        $ordr = new Order_plac;
-
-                        $ordr->place_order_id = $use->id;
-                        $ordr->product_option = $request->key[$i];
-                        $ordr->poductid = $request->po1[$i][$j];
-                        $ordr->save();
-                        // var_dump($request->po1[$i][$j]);
+                        // var_dump($request->key[$i]);
                         
+                        
+                        $count2 = count($request->po1[$i]);
+                        
+                        for($j=0; $j< $count2; $j++ )
+                        {
+                            $ordr = new Order_plac;
 
+                            $ordr->place_order_id = $use->id;
+                            $ordr->product_option = $request->key[$i];
+                            $ordr->poductid = $request->po1[$i][$j];
+                            $ordr->save();
+                            // var_dump($request->po1[$i][$j]);
+                            
+
+                        }
+                    
                     }
-                
                 }
-            }
-            $cont3=count($request->key2);
+            }  
+            if(isset($request->key2))
+            {  
+                $cont3=count($request->key2);
 
-            for($i=0; $i< $cont3; $i++ )
-            {
-                // echo "<pre>";
-
-                if(isset($request->co1[$i]))
+                for($i=0; $i< $cont3; $i++ )
                 {
-                    // var_dump($request->key2[$i]);
-                    
-                    
-                    $count4 = count($request->co1[$i]);
-                    
-                    for($j=0; $j< $count4; $j++ )
+                    // echo "<pre>";
+
+                    if(isset($request->co1[$i]))
                     {
-                        $ordr = new Order_plac_color;
-
-                        $ordr->place_order_id = $use->id;
-                        $ordr->product_option = $request->key2[$i];
-                        $ordr->poductid = $request->co1[$i][$j];
-                        $ordr->save();
-                        // var_dump($request->po1[$i][$j]);
+                        // var_dump($request->key2[$i]);
                         
+                        
+                        $count4 = count($request->co1[$i]);
+                        
+                        for($j=0; $j< $count4; $j++ )
+                        {
+                            $ordr = new Order_plac_color;
 
+                            $ordr->place_order_id = $use->id;
+                            $ordr->product_option = $request->key2[$i];
+                            $ordr->poductid = $request->co1[$i][$j];
+                            $ordr->save();
+                            // var_dump($request->po1[$i][$j]);
+                            
+
+                        }
+                    
                     }
-                
                 }
             }
             //  die();

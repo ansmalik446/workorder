@@ -128,7 +128,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{url('admin/add_product')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('superadmin/add_product')}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row p-3">

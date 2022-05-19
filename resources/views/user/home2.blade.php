@@ -305,10 +305,9 @@
     $file3=explode(",",$data->logo3);
 
 @endphp
-@forelse($ex as $key => $value)
-    @if($ex[$key]!='Not Given')
 <table style="width: 30%;display: ">    
 <tbody>
+
      
     <tr>
 
@@ -317,7 +316,8 @@
         </td>
     </tr>                        
                                        
-                            
+@forelse($ex as $key => $value)
+    @if($ex[$key]!='Not Given')                            
     <tr>
         <td style="padding-left:20px;padding-top:2px;">
             <img src="{{asset('upload/'.$file3[$key])}}" alt="" style="width: 50%;">
@@ -325,30 +325,30 @@
     </tr>
     <tr>
         <td style="padding-left: 20px;">
-            <p style="color: red;margin-top: 3px;"><span style="font-weight: bold;color: black;">- Size:</span>{{$ex[$key]}}</p>
+            <p style="color: red;margin-top: 5px;"><span style="font-weight: bold;color: black;">Size:</span>{{$ex[$key]}}</p>
         </td>
     </tr>
     <tr>
         <td style="padding-left: 20px;">
-            <p style="color: red;margin-top: 3px;"><span style="font-weight: bold;color: black;"><span style="color: red;">-</span> Location: </span>{{$loc3[$key]}}</p>
+            <p style="color: red;margin-top:-13px;"><span style="font-weight: bold;color: black;">Location: </span>{{$loc3[$key]}}</p>
         </td>
     </tr>
-    
+ @endif
+                        @empty
+                            
+                        @endforelse   
 </tbody>
 
 </table>
-@endif
-                        @empty
-                            
-                        @endforelse
+
 
 
 
 @if(count($data->roaster)!=0) 
-<table style="width:100%;">
+<table style="width:100%;page-break-before: always;" >
 <tbody>
     <tr>
-        <th scope="col" style="width: 100%;padding-top: 20px;">
+        <th scope="col" style="width: 100%;">
 
           {{--   <img src="images/logo.gif" alt="" style="width: 50%;"> --}}
 
