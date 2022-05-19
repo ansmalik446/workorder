@@ -103,7 +103,8 @@ class optionController extends Controller
              for($i=0; $i < count($request->name);  $i++)
              {
                    
- 
+                if($request->propert!="")
+                {
                    $user=new product_option();
                    $user->product_id=$request->product_id;
          
@@ -114,10 +115,8 @@ class optionController extends Controller
                    $user->property=$request->propert;
                   
                    $user->save();
- 
- 
- 
-             }
+                }
+            }
          
              if($user->save()){
                  return response()->json(200);

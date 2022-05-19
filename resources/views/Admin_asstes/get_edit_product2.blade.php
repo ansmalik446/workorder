@@ -42,6 +42,7 @@
                 <input class="pro_vari2" name="chalid" type="hidden" value="{{$chalid}}">
 
                     <select class="form-control colorval" name="name[]">
+                        <option value="">--Select Color Name--</option>
                         @foreach($products as $row)
                         <option value="{{$row->property}}" val2="{{$row->color}}">
                             {{$row->property}}
@@ -53,13 +54,13 @@
                             color
                         </b>
                     </label>
-                    <input class="form-control" name="color" type="color" >
+                    <input id="colorcode" class="form-control" name="color" type="color" >
                     <label>
                         <b>
                             chane color name
                         </b>
                     </label>
-                    <input class="form-control" name="propert" type="text" >
+                    <input id="colorname" class="form-control" name="propert" type="text" >
 
             
             
@@ -103,13 +104,10 @@
 
         
         $('.colorval').change(function() {
-            //Use $option (with the "$") to see that the variable is a jQuery object
             var $option = $(this).find('option:selected');
-            //Added with the EDIT
-            var value = $option.val();//to get content of "value" attrib
-            var val2 = $option.attr('val2');//to get <option>Text</option> content
+            $("#colorname").val($option.val());
+            $("#colorcode").val($option.attr('val2'));
             
-            alert(text);
         });
 
     });
