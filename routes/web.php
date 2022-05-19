@@ -98,7 +98,9 @@ Route::prefix('/superadmin')->middleware(['SessionCheck', 'auth'])->group(functi
     Route::get('get_product_option',[AdminController::class,'get_product_option']);
     Route::post('/save_product_option',[optionController::class,'save_product_option']);
     Route::get('/get_edit_product',[optionController::class,'get_edit_product']);
+    Route::get('/get_edit_product2',[optionController::class,'get_edit_product2']);
     Route::post('/update_product_option',[optionController::class,'update_product_option']);
+    Route::post('/update_product_option2',[optionController::class,'update_product_option2']);
     Route::post('/add_prod_option',[optionController::class,'add_prod_option']);
     // Route::get('/product_detail',[AdminController::class,'product_detail']);
   
