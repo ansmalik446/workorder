@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\product_option;
-use App\Models\prod_option;
+use App\Models\Prod_option;
 
 use DB;
 

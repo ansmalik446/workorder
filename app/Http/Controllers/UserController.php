@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Sport;
 use App\Models\roaster;
-use App\Models\Product_option;
+use App\Models\product_option;
 use App\Models\place_order;
 use App\Models\Order_plac;
 use App\Models\Order_plac_color;
@@ -988,6 +988,7 @@ class UserController extends Controller
     return view('user.order',compact('orderdetail'));
     }
     public function order_detail($id){
+        // dd($id);
             $data=place_order::with('lettering','roaster')->find($id);
 
         return view('user.order_detail' ,compact('data'));

@@ -45,7 +45,7 @@ class AdminController extends Controller
         return view('Admin_asstes.index',compact('orders'));
     }
     function users(){
-        $users=User::where('role','user')->get();
+        $users=User::where('role','admins')->get();
         return view('Admin_asstes.users',compact('users'));
 
     }
@@ -121,7 +121,7 @@ class AdminController extends Controller
         $user->Bio=$request->bio;
         $user->save();
         // dd($user);
-        return redirect('admin/users')->with("success","Successfully Updated Profile");
+        return redirect('superadmin/users')->with("success","Successfully Updated Profile");
     }
     function add_sports(Request $request){
         $sport=new Sport();
@@ -286,7 +286,7 @@ public function update_profile(Request $request){
  
     $user->save();
     // dd($user);
-    return redirect('admin/index')->with("success","Successfully Updated Admin Profile");
+    return redirect('superadmin/index')->with("success","Successfully Updated Admin Profile");
     
     
 }

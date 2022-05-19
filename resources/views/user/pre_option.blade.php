@@ -429,6 +429,7 @@ section.productFeatures {
 
                         @endphp
                         @forelse($ex as $key => $value)
+                        
                             @if($ex[$key]!='Not Given')
                             <div class="col-4 border-right deleterow p-3">
                                 

@@ -105,8 +105,11 @@ class ordercontroler extends Controller
         $use->save();
         
         
-         $cont=count($request->type);
 
+
+        if(isset($request->type))
+        {
+            $cont=count($request->type);
 
          for($i=0; $i< $cont ; $i++ )
 
@@ -167,6 +170,7 @@ class ordercontroler extends Controller
                     $cont++;
                 }
             }
+        }
 
             
             $prev_id=$request->id;

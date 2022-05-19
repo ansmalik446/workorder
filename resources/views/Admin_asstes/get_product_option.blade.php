@@ -64,7 +64,7 @@
                             <div class="col-lg-12 my-2">
                                 {{$list2->child}}
                                 <div class="float-right">
-                                    <i class="fas fa-plus mr-1 pluscolor pro_op" val="{{$list2->parent}}" val2="{{$list2->child}}">
+                                    <i class="fas fa-plus mr-1 pluscolor pro_op2" val="{{$list2->parent}}" val2="{{$list2->child}}">
                                     </i>
                                     <i class="fas fa-edit editcolor pro_edit2" val="{{$list2->parent}}" val2="{{$list2->child}}" val3="{{$id}}">
                                     </i>
@@ -205,9 +205,64 @@
                                         <br>
                                             <input type="hidden" name="product_id" value="{{$id}}">
                                             <input type="hidden" name="parent" value="" class="pro_vari">
-                                            <input type="text" name="chalid" value="" class="pro_vari2">
+                                            <input type="hidden" name="chalid" value="" class="pro_vari2">
 
                                             <input class="form-control mt-1 pro_name" name="name" placeholder="Product Option Name" required="" type="text">
+                                            
+                                            </input>
+                                        </br>
+                                    </div>
+                                   
+                                </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            {{--
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                                Close
+                            </button>
+                            --}}
+                            <button class="btn btn-primary btnSubmit" type="submit">
+                                Add
+                            </button>
+                            
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div aria-hidden="true" aria-labelledby="exampleModalcolLabel" class="modal fade" id="exampleModalcol" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalcolLabel">
+                                Add Product Option
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                <span aria-hidden="true">
+                                    ×
+                                </span>
+                            </button>
+                        </div>
+                        <form  method="POST" enctype="multipart/form-data" id="myform7">
+                        @csrf
+                        <div class="modal-body">
+                           
+
+              
+                                <div class="row p-3">
+                                    <div class="col-12 mt-2">
+                                        <label>
+                                            <b>
+                                                Name
+                                            </b>
+                                        </label>
+                                        <br>
+                                            <input type="hidden" name="product_id" value="{{$id}}">
+                                            <input type="hidden" name="parent" value="" class="pro_vari">
+                                            <input type="hidden" name="chalid" value="" class="pro_vari2">
+
+                                            <input class="form-control mt-1 pro_name2" name="name" placeholder="Product Option Name" required="" type="text">
                                             <label>
                                             <b>
                                                 Color
@@ -227,7 +282,7 @@
                                 Close
                             </button>
                             --}}
-                            <button class="btn btn-primary btnSubmit" type="submit">
+                            <button class="btn btn-primary btnSubmit7" type="submit">
                                 Add
                             </button>
                             
@@ -408,12 +463,8 @@
 
                                             <input class="form-control mt-1" name="child" placeholder="Enter Color Name" required="" type="text">
                                             </input>
-                                            <label>
-                                            <b>
-                                                Select Color
-                                            </b>
-                                        </label>
-                                            <input class="form-control mt-1" name="color" required="" type="color">
+                                            
+                                            <input class="form-control mt-1" name="color" required="" type="hidden">
                                             </input>
                                         </br>
                                     </div>
@@ -461,7 +512,6 @@
 
     $(document).ready(function () {
             $('.pro_op').on('click', function () {
-               
                 jQuery.noConflict();
 
                
@@ -478,6 +528,21 @@
 
                 
             });
+
+            $('.pro_op2').on('click', function () {
+                jQuery.noConflict();
+
+               
+                var id = $(this).attr('val');
+                var id2 = $(this).attr('val2');
+                $(".pro_vari").val(id);
+                $(".pro_vari2").val(id2);
+                 $('.modal-title').empty().append(id);
+
+                
+                $('#exampleModalcol').modal('show');
+                                
+            });
             
             $('.prod_op').on('click', function () {
                 jQuery.noConflict();
@@ -487,6 +552,7 @@
             });
 
             $('.color_ver').on('click', function () {
+
                 jQuery.noConflict();
                 $('#exampleModalcolor').modal('show');
 
@@ -602,6 +668,69 @@
          
  
     });
+
+    // 
+    $(".btnSubmit7").click(function (event) {
+ 
+ //stop submit the form, we will post it manually.
+ event.preventDefault();
+ $.ajaxSetup({
+     headers: {
+     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     }
+ });
+
+ // Get form
+ var data = $('#myform7').serializeArray();
+ var pro_name=$(".pro_name2").val();
+
+ console.log(data);
+
+
+
+// disabled the submit button
+ $("#btnSubmit7").prop("disabled", true);
+
+
+     $.ajax({
+         type: "POST",
+         enctype: 'multipart/form-data',
+         url: '{{URL::to('superadmin/save_product_option')}}',
+         data: data,
+         success: function (data) {
+             if(data==200)
+             {
+                 $('#exampleModalcol').modal('hide');
+                 swal("Success", "Request Submitted Successfully colller!", "success");
+                 
+             }
+             if(data==201)
+             {
+                
+                 $('#exampleModalcol').modal('hide');
+                  swal ( "Oops" ,  "Name is Required!" ,  "error" );
+             }
+             
+
+
+             
+
+         },
+         error: function (e) {
+
+            swal ( "Oops" ,  "Something went wrong!" ,  "error" )
+
+
+         }
+     });
+ 
+ 
+      
+  
+
+});
+    // 
+    
 
     $(".btnSubmit2").click(function (event) {
  

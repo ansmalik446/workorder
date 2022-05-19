@@ -305,6 +305,7 @@
     $file3=explode(",",$data->logo3);
 
 @endphp
+
 <table style="width: 30%;display: ">    
 <tbody>
 
